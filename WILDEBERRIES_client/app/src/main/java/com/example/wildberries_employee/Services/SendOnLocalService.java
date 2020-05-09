@@ -10,9 +10,11 @@ import com.example.wildberries_employee.ServerConnection.URLSendRequest;
 
 import androidx.annotation.RequiresApi;
 
+import static com.example.wildberries_employee.Activity.MainActivity.getLocalAddress;
 
-public class SendInfoService extends Service {
-    private static URLSendRequest url = new URLSendRequest(URLSendRequest.SERVER_IP, 5000);
+
+public class SendOnLocalService extends Service {
+    private static URLSendRequest localURL = new URLSendRequest(getLocalAddress(), 5000);
     final String LOG_TAG = "myLogs";
 
     public void onCreate() {
@@ -23,7 +25,8 @@ public class SendInfoService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOG_TAG, "onStartCommand");
-        sendOnGlobalServer("123");
+        String json = intent.getStringExtra("jsonG");
+        sendOnLocalServer(json);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -34,8 +37,11 @@ public class SendInfoService extends Service {
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    void sendOnGlobalServer(String json) {
-        String s = url.post("getInfo", "json=" + json);
+    void sendOnLocalServer(String json) {
+        String s = localURL.post("getInfo", "json=" + json);
+        if (s == null) {
+            stopSelf();
+        }
     }
 
     @Override

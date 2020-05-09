@@ -13,6 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".Services.SendOnGlobalServer"
+            android:enabled="true">
+        </service>
+        <service android:name=".Services.SendOnLocalService"
+            android:enabled="true">
+        </service>
         <activity android:name="com.example.wildberries_employee.Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
