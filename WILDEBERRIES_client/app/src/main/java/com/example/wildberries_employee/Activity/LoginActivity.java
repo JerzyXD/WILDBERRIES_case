@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                             makeToast(getString(R.string.login_err2));
                             break;
                     }
-                } catch (JSONException ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
 

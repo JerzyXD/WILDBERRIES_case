@@ -13,7 +13,6 @@ import com.example.wildberries_employee.ServerConnection.URLSendRequest;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-@SuppressLint("Registered")
 public class SendOnGlobalServer extends Service {
     private static URLSendRequest url = new URLSendRequest(URLSendRequest.SERVER_IP, 5000);
     final String LOG_TAG = "myLogs";
@@ -45,7 +44,6 @@ public class SendOnGlobalServer extends Service {
         }
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
