@@ -1,0 +1,2 @@
+rootProject.name='WILDEBERRIES_employee'
+include ':app'
