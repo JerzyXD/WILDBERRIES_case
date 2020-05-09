@@ -22,10 +22,14 @@ import org.json.JSONObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.example.wildberries_employee.Activity.MainActivity.getLocalAddress;
+
 public class LoginActivity extends AppCompatActivity {
 
     static SharedPreferences settings;
     private URLSendRequest url = new URLSendRequest(URLSendRequest.SERVER_IP, 5000);
+    private static URLSendRequest localUrl = new URLSendRequest(getLocalAddress(), 5000);
+    private static String connectionType;
 
     @SuppressLint("ShowToast")
     @Override
@@ -41,21 +45,32 @@ public class LoginActivity extends AppCompatActivity {
             TextView passwordText = findViewById(R.id.password);
             String login =  loginText.getText().toString();
             String password = passwordText.getText().toString();
-
+            JSONObject jsonObject;
+            String s = "no request";
                 try {
-                    String s = url.get("log?login=" + login + "&password=" + password);
-                    System.out.println(s);
-                    JSONObject jsonObject = new JSONObject(s);
+                    while (true) {
+                        s = url.get("log?login=" + login + "&password=" + password);
+                        System.out.println(s);
+                        jsonObject = new JSONObject(s);
+                        if (s != null) {
+                            connectionType = "Глобальное подключение";
+                            break;
+                        } else {
+                          s = localUrl.get("log?login=" + login + "&password=" + password);
+                          connectionType = "Локальное подключение";
+                        }
+                    }
+
 
                     switch (jsonObject.getString("err")) {
                         case "0":
                             Logger.getLogger("intlog").log(Level.INFO, s);
 
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("login", jsonObject.getString("login"));
-                        editor.putString("position", jsonObject.getString("position"));
-                        editor.putString("address", jsonObject.getString("address"));
-                        editor.apply();
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("login", jsonObject.getString("login"));
+                            editor.putString("position", jsonObject.getString("position"));
+                            editor.putString("address", jsonObject.getString("address"));
+                            editor.apply();
 
                             Intent intent = new Intent(this, MainActivity.class);
                             startActivity(intent);
@@ -94,5 +109,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String getAddress() {
        return settings.getString("address", "  ");
+    }
+
+    public static String getConnectionType() {
+        return connectionType;
     }
 }

@@ -38,8 +38,10 @@ public class SendOnLocalService extends Service {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     void sendOnLocalServer(String json) {
-        String s = localURL.post("getInfo", "json=" + json);
-        if (s == null) {
+        String s = localURL.post("getinfo", "json=" + json);
+        System.out.println(s);
+        System.out.println(json);
+        if (s != null) {
             stopSelf();
         }
     }

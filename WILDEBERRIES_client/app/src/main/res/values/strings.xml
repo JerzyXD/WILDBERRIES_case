@@ -5,4 +5,5 @@
     <string name="login_err1">Ошибка в логине или пароле</string>
     <string name="login_err2">Ошибка на сервере</string>
     <string name="server">Сервер</string>
+    <string name="connectionTypeText">Тип подключения:</string>
 </resources>

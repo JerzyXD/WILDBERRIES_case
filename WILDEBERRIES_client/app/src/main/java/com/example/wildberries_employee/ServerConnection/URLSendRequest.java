@@ -19,7 +19,7 @@ public class URLSendRequest {
 
     private int TIME_OUT;
     private String SERVER_URL;
-    public static final String SERVER_IP = "http://jutter.online/WILDBERRIES/";
+    public static final String SERVER_IP = "http://89.250.2.13/WILDBERRIES/";
 
     /**
      * Конструктор класса

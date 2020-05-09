@@ -6,7 +6,8 @@
     <color name="pink"> #CB11AB </color>
     <color name="white">#F8F8F8</color>
     <color name="pink_light">#CD9BC5</color>
-
-
+    <color name="backgroundCard">#D3CFD3</color>
+    <color name="textCard">#000000</color>
+    <color name="infoText">#9D47FF</color>
 
 </resources>

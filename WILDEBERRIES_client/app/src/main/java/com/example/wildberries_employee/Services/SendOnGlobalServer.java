@@ -38,8 +38,10 @@ public class SendOnGlobalServer extends Service {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     void sendOnGlobalServer(String json) {
-        String s = url.post("getInfo", "json=" + json);
-        if (s == null) {
+        String s = url.post("getinfo", "json=" + json);
+        System.out.println(s);
+        System.out.println(json);
+        if (s != null) {
             stopSelf();
         }
     }

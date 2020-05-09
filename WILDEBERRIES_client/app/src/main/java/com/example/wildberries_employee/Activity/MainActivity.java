@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.wildberries_employee.R;
-import com.example.wildberries_employee.ServerConnection.URLSendRequest;
 import com.example.wildberries_employee.Services.SendOnGlobalServer;
 import com.example.wildberries_employee.Services.SendOnLocalService;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.example.wildberries_employee.Activity.LoginActivity.getAddress;
+import static com.example.wildberries_employee.Activity.LoginActivity.getConnectionType;
 import static com.example.wildberries_employee.Classes.DataManager.getGlobalInfo;
 import static com.example.wildberries_employee.Classes.DataManager.getLocalInfo;
 
@@ -25,28 +24,28 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         TextView serverAddress = findViewById(R.id.serverAddress);
+        TextView connectionType = findViewById(R.id.connectionTypeTV);
+
         settings = getSharedPreferences("test", Context.MODE_PRIVATE);
         serverAddress.setText(settings.getString("serverAddress", " "));
+        connectionType.setText("Тип подключения: " + getConnectionType());
         serverAddressText = serverAddress.getText().toString();
         System.out.println(getLocalAddress());
 
-           String jsonLocal = getLocalInfo();
-                  String jsonGlobal = getGlobalInfo();
-                  System.out.println(jsonGlobal);
-                  System.out.println(jsonLocal);
-                  System.out.println(getLocalAddress());
+        String jsonLocal = getLocalInfo();
+        String jsonGlobal = getGlobalInfo();
 
-                  if (jsonGlobal != null) {
-                      startService(new Intent(this, SendOnLocalService.class).putExtra("jsonG", jsonGlobal));
-                      System.out.println("Отправка на локальный");
-                  }
+        if (jsonGlobal != null) {
+            startService(new Intent(this, SendOnLocalService.class).putExtra("jsonG", jsonGlobal));
+            System.out.println("Отправка на локальный");
+        }
 
-                  if (jsonLocal != null) {
-                     startService(new Intent(this, SendOnGlobalServer.class).putExtra("jsonL", jsonLocal));
-                      System.out.println("Отправка на глобальный");
-                  }
-
+        if (jsonLocal != null) {
+            startService(new Intent(this, SendOnGlobalServer.class).putExtra("jsonL", jsonLocal));
+            System.out.println("Отправка на глобальный");
+        }
     }
 
     @Override
