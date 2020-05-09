@@ -1,3 +1,3 @@
-# PythonQuest
+# WILDBERRIES_case
 ---
-![](https://bonus-spasibo.ru/storage/wb_logo_2018.png)
+![](https://merchnews.ru/content/uploads/2020/03/wilberries-logo-1200x470.png)
