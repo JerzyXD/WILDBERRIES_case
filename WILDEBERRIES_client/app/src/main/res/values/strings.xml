@@ -2,4 +2,6 @@
     <string name="app_name">WILDBERRIES</string>
     <string name="login">Логин</string>
     <string name="login_password">Пароль</string>
+    <string name="login_err1">Ошибка в логине или пароле</string>
+    <string name="login_err2">Ошибка на сервере</string>
 </resources>

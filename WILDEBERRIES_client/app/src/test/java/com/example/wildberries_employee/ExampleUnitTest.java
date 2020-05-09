@@ -1,4 +1,4 @@
-package com.example.wildeberries_employee;
+package com.example.wildberries_employee;
 
 import org.junit.Test;
 

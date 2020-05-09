@@ -1,4 +1,4 @@
-package com.example.wildeberries_employee.ServerConnection;
+package com.example.wildberries_employee.ServerConnection;
 
 import android.os.Build;
 
@@ -19,8 +19,7 @@ public class URLSendRequest {
 
     private int TIME_OUT;
     private String SERVER_URL;
-    public static final String SERVER_IP = "http://jutter.online:8080/Integer/";
-    //public static final String SERVER_IP = "http://localhost:8080/Integer/";
+    public static final String SERVER_IP = "http://jutter.online/WILDBERRIES/";
 
     /**
      * Конструктор класса
