@@ -1,30 +1,37 @@
 package com.example.wildberries_employee.Activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.widget.TextView;
 
 import com.example.wildberries_employee.R;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.example.wildberries_employee.Activity.LoginActivity.getAddress;
-import static com.example.wildberries_employee.Classes.DataManager.getInfo;
-
 public class MainActivity extends AppCompatActivity {
+    static SharedPreferences settings;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        System.out.println(getAddress());
-        System.out.println(getInfo());
-
+        TextView serverAddress = findViewById(R.id.serverAddress);
+        settings = getSharedPreferences("test", Context.MODE_PRIVATE);
+        serverAddress.setText(settings.getString("serverAddress", " "));
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        TextView serverAddress = findViewById(R.id.serverAddress);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("serverAddress", serverAddress.getText().toString());
+        editor.apply();
+    }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
     }
 }

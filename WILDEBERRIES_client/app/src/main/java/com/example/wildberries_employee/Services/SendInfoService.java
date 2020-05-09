@@ -2,10 +2,13 @@ package com.example.wildberries_employee.Services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.example.wildberries_employee.ServerConnection.URLSendRequest;
+
+import androidx.annotation.RequiresApi;
 
 
 public class SendInfoService extends Service {
@@ -17,9 +20,10 @@ public class SendInfoService extends Service {
         Log.d(LOG_TAG, "onCreate");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOG_TAG, "onStartCommand");
-        sendOnGlobalServer();
+        sendOnGlobalServer("123");
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -29,8 +33,9 @@ public class SendInfoService extends Service {
     }
 
 
-    void sendOnGlobalServer() {
-        //String s = url.post();
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    void sendOnGlobalServer(String json) {
+        String s = url.post("getInfo", "json=" + json);
     }
 
     @Override
