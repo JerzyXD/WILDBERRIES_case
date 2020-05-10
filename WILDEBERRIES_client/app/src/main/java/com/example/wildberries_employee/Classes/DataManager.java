@@ -10,18 +10,25 @@ public class DataManager {
      private static URLSendRequest url = new URLSendRequest(URLSendRequest.SERVER_IP, 5000);
      private static URLSendRequest localUrl = new URLSendRequest(getLocalAddress(), 5000);
 
+    /**
+     * Получение данных с локального сервера
+     * @return строка, полученная с сервера
+     */
+
     public static String getLocalInfo() {
-            String s;
-            s = localUrl.get("getinfo?address=" + getAddress());
+            String  s = localUrl.get("getinfo?address=" + getAddress());
             System.out.println("Get Local Info: " + s);
             return s;
     }
 
     /**
-     * отправка данных на локальный сервер
+     * получение данных с глобального сервера
+     * @return строка, полученная с сервера
      */
     public static String getGlobalInfo() {
-        return url.get("getinfo?address=" + getAddress());
+        String s = url.get("getinfo?address=" + getAddress());
+        System.out.println("Get global info" + s);
+        return s;
     }
 
 }

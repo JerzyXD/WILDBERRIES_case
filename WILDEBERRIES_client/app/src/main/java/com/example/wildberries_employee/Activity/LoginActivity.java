@@ -48,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject jsonObject;
             String s = "no request";
                 try {
+                    /*
+                     Цикл while для определения типа подключения.
+                     Если при попытке подключения к глобальному серверу пришла строка null, то пытается подключиться к локальному
+                     */
                     while (true) {
                         s = url.get("log?login=" + login + "&password=" + password);
                         System.out.println(s);
@@ -58,9 +62,9 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                           s = localUrl.get("log?login=" + login + "&password=" + password);
                           connectionType = "Локальное подключение";
+                          break;
                         }
                     }
-
 
                     switch (jsonObject.getString("err")) {
                         case "0":
@@ -97,19 +101,17 @@ public class LoginActivity extends AppCompatActivity {
         toast.show();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
+    /**
+     * @return строку с адрессом пункта выдачи, полученную с сервера
+     */
     public static String getAddress() {
        return settings.getString("address", "  ");
     }
+
+    /**
+     * @return к какому серверу подключено устройство (глобальный/локальный)
+     */
 
     public static String getConnectionType() {
         return connectionType;

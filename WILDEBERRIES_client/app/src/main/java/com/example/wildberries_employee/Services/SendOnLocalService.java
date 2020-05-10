@@ -12,6 +12,9 @@ import androidx.annotation.RequiresApi;
 
 import static com.example.wildberries_employee.Activity.MainActivity.getLocalAddress;
 
+/**
+ * Сервис для отправки данных с глобального сервера на локальный
+ */
 
 public class SendOnLocalService extends Service {
     private static URLSendRequest localURL = new URLSendRequest(getLocalAddress(), 5000);
@@ -36,11 +39,14 @@ public class SendOnLocalService extends Service {
     }
 
 
+    /**
+     * @param json данные с глобального сервера, отправленные на локальный
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     void sendOnLocalServer(String json) {
+        Log.d(LOG_TAG, "Send on local server");
         String s = localURL.post("getinfo", "json=" + json);
         System.out.println(s);
-        System.out.println(json);
         if (s != null) {
             stopSelf();
         }

@@ -1,17 +1,18 @@
 package com.example.wildberries_employee.Services;
 
-import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
-
 import com.example.wildberries_employee.ServerConnection.URLSendRequest;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+/**
+ * Сервис для отправки данных с локального сервера на глобальный
+ */
 
 public class SendOnGlobalServer extends Service {
     private static URLSendRequest url = new URLSendRequest(URLSendRequest.SERVER_IP, 5000);
@@ -35,12 +36,14 @@ public class SendOnGlobalServer extends Service {
         Log.d(LOG_TAG, "onDestroy");
     }
 
-
+    /**
+     * @param json данные с локального сервера, отправленные на глобальный
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     void sendOnGlobalServer(String json) {
+        Log.d(LOG_TAG, "Send on global server");
         String s = url.post("getinfo", "json=" + json);
         System.out.println(s);
-        System.out.println(json);
         if (s != null) {
             stopSelf();
         }
